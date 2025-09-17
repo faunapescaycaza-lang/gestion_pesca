@@ -21,15 +21,16 @@
             height: 100%;
         }
         header {
-            background-color: #005f73; /* New teal color */
+            background-color: #005f73;
             color: white;
             padding: 0.5rem 1rem;
             text-align: center;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            z-index: 100;
+            z-index: 101; /* Ensure header is above content */
             display: flex;
             align-items: center;
             justify-content: space-between;
+            position: relative;
         }
         header h1 {
             margin: 0;
@@ -48,11 +49,12 @@
             overflow: hidden;
         }
         nav {
-            width: 260px; /* Narrower menu */
+            width: 260px;
             background-color: #ffffff;
             border-right: 1px solid #e0e0e0;
             padding: 1.5rem;
             overflow-y: auto;
+            transition: transform 0.3s ease-in-out;
         }
         nav h2 {
             margin-top: 0;
@@ -90,18 +92,18 @@
             text-decoration: none;
             color: #424242;
             display: block;
-            padding: 0.7rem 1rem; /* Smaller padding */
+            padding: 0.7rem 1rem;
             border-radius: 6px;
             transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
             margin-bottom: 0.5rem;
-            font-size: 0.85em; /* Smaller font size */
+            font-size: 0.85em;
         }
         ul.submenu li a:hover {
-            background-color: #e0f7fa; /* Lighter teal for hover */
-            color: #005f73; /* Match new header color */
+            background-color: #e0f7fa;
+            color: #005f73;
         }
         ul.submenu li a.active {
-            background-color: #005f73; /* Match new header color */
+            background-color: #005f73;
             color: #ffffff;
         }
         ul.submenu li a strong {
@@ -120,14 +122,14 @@
             border: none;
         }
 
-        /* Basic styles for the menu toggle button */
         .menu-toggle {
-            display: none; /* Hidden by default */
+            display: none;
             background: none;
             border: none;
             cursor: pointer;
             padding: 0.5rem;
             margin-left: 1rem;
+            z-index: 1001; /* Above the nav */
         }
         .menu-toggle span {
             display: block;
@@ -138,41 +140,43 @@
             transition: all 0.3s ease-in-out;
         }
 
-        /* Media Query for mobile devices */
+        .overlay {
+            display: none;
+        }
+
+        /* Mobile Styles */
         @media (max-width: 768px) {
             .header-logo {
-                display: none; /* Hide logos on small screens to save space */
+                display: none;
             }
             header h1 {
-                font-size: 1.1em; /* Reduce header font size */
+                font-size: 1.1em;
                 text-align: left;
                 margin-left: 1rem;
             }
             .menu-toggle {
-                display: block; /* Show the hamburger button */
+                display: block;
             }
             nav {
                 position: fixed;
-                left: -280px; /* Start off-screen */
+                left: 0;
                 top: 0;
                 height: 100%;
                 z-index: 1000;
-                transition: left 0.3s ease-in-out;
-                box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-                width: 280px; /* A bit wider for mobile */
+                transform: translateX(-100%);
+                box-shadow: 5px 0 15px rgba(0,0,0,0.2);
+                width: 260px;
             }
             .nav-open nav {
-                left: 0; /* Slide in */
+                transform: translateX(0);
             }
-            .main-content {
-                flex-direction: column;
+            nav h2 {
+                background-color: #f0f2f5;
+                margin: -1.5rem -1.5rem 1.5rem -1.5rem;
+                padding: 1rem 1.5rem;
+                font-size: 1.2em;
             }
-            .content {
-                width: 100%;
-            }
-            /* Add an overlay to the content when nav is open */
             .overlay {
-                display: none;
                 position: fixed;
                 top: 0;
                 left: 0;
@@ -184,10 +188,21 @@
             .nav-open .overlay {
                 display: block;
             }
+
+            /* Animate hamburger to X */
+            .nav-open .menu-toggle span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+            .nav-open .menu-toggle span:nth-child(2) {
+                opacity: 0;
+            }
+            .nav-open .menu-toggle span:nth-child(3) {
+                transform: rotate(-45deg) translate(7px, -6px);
+            }
         }
     </style>
 </head>
-<body>
+<body class="">
     <div class="dashboard">
         <header>
             <button class="menu-toggle" aria-label="Toggle menu">
@@ -228,40 +243,11 @@
         </div>
     </div>
     <script>
-        // Simple script to handle active state
+        const body = document.querySelector('body');
+        const menuToggle = document.querySelector('.menu-toggle');
+        const overlay = document.querySelector('.overlay');
         const links = document.querySelectorAll('nav ul.submenu li a');
         const iframe = document.querySelector('iframe[name="content_frame"]');
-
-        links.forEach(link => {
-            link.addEventListener('click', function(e) {
-                // Don't do anything for links that open in a new tab
-                if (this.target === '_blank') {
-                    return;
-                }
-                
-                e.preventDefault(); // Prevent default link behavior
-
-                // Remove active class from all links that don't open in a new tab
-                links.forEach(l => {
-                    if (l.target !== '_blank') {
-                        l.classList.remove('active');
-                    }
-                });
-                
-                // Add active class to the clicked link
-                this.classList.add('active');
-
-                // Update iframe src if it's different
-                if (iframe.src !== this.href) {
-                    iframe.src = this.href;
-                }
-            });
-        });
-
-        // Responsive menu script
-        const menuToggle = document.querySelector('.menu-toggle');
-        const body = document.querySelector('body');
-        const overlay = document.querySelector('.overlay');
 
         menuToggle.addEventListener('click', () => {
             body.classList.toggle('nav-open');
@@ -271,12 +257,25 @@
             body.classList.remove('nav-open');
         });
 
-        // Also close the nav when a link is clicked on mobile
         links.forEach(link => {
             link.addEventListener('click', function(e) {
-                if (this.target !== '_blank') {
-                    body.classList.remove('nav-open');
+                if (this.target === '_blank') {
+                    return;
                 }
+                e.preventDefault();
+
+                links.forEach(l => {
+                    if (l.target !== '_blank') {
+                        l.classList.remove('active');
+                    }
+                });
+                this.classList.add('active');
+
+                if (iframe.src !== this.href) {
+                    iframe.src = this.href;
+                }
+
+                body.classList.remove('nav-open');
             });
         });
     </script>
