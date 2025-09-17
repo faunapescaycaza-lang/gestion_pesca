@@ -123,21 +123,7 @@
         }
 
         .menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 0.5rem;
-            margin-left: 1rem;
-            z-index: 1001; /* Above the nav */
-        }
-        .menu-toggle span {
-            display: block;
-            width: 25px;
-            height: 3px;
-            background-color: white;
-            margin: 5px 0;
-            transition: all 0.3s ease-in-out;
+            display: none; /* Hidden by default on desktop */
         }
 
         .overlay {
@@ -151,11 +137,21 @@
             }
             header h1 {
                 font-size: 1.1em;
-                text-align: left;
-                margin-left: 1rem;
+                text-align: center; /* Center title */
+                margin-left: 0;
             }
             .menu-toggle {
-                display: block;
+                display: block; /* Show button on mobile */
+                background-color: transparent;
+                border: 1px solid white;
+                color: white;
+                padding: 0.4rem 0.8rem;
+                border-radius: 5px;
+                font-size: 0.9em;
+                font-weight: 700;
+                cursor: pointer;
+                z-index: 1001;
+                margin-right: 1rem; /* Add some space to the right */
             }
             nav {
                 position: fixed;
@@ -188,30 +184,15 @@
             .nav-open .overlay {
                 display: block;
             }
-
-            /* Animate hamburger to X */
-            .nav-open .menu-toggle span:nth-child(1) {
-                transform: rotate(45deg) translate(5px, 5px);
-            }
-            .nav-open .menu-toggle span:nth-child(2) {
-                opacity: 0;
-            }
-            .nav-open .menu-toggle span:nth-child(3) {
-                transform: rotate(-45deg) translate(7px, -6px);
-            }
         }
     </style>
 </head>
 <body class="">
     <div class="dashboard">
         <header>
-            <button class="menu-toggle" aria-label="Toggle menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
+            <button class="menu-toggle" aria-label="Toggle menu">Menú</button>
             <img src="Captura de pantalla 2025-08-22 164111.png" alt="Logo 1" class="header-logo">
-            <h1>Gestión de Pesca Ríos de Neuquén - Dirección Provincial de Fauna</h1>
+            <h1>Gestión de Pesca Ríos de Neuquén</h1>
             <img src="Captura de pantalla 2025-09-01 124324.png" alt="Logo 2" class="header-logo">
         </header>
         <div class="main-content">
@@ -251,10 +232,16 @@
 
         menuToggle.addEventListener('click', () => {
             body.classList.toggle('nav-open');
+            if (body.classList.contains('nav-open')) {
+                menuToggle.textContent = 'Cerrar';
+            } else {
+                menuToggle.textContent = 'Menú';
+            }
         });
 
         overlay.addEventListener('click', () => {
             body.classList.remove('nav-open');
+            menuToggle.textContent = 'Menú';
         });
 
         links.forEach(link => {
@@ -276,6 +263,7 @@
                 }
 
                 body.classList.remove('nav-open');
+                menuToggle.textContent = 'Menú';
             });
         });
     </script>
