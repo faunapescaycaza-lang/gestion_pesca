@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Pesca Ríos de Neuquén</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f2f5;
+        }
+        .dashboard {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        header {
+            background-color: #005f73; /* New teal color */
+            color: white;
+            padding: 0.5rem 1rem;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 1.4em;
+            font-weight: 400;
+            flex-grow: 1;
+        }
+        .header-logo {
+            height: 60px;
+            width: auto;
+            margin: 0 1rem;
+        }
+        .main-content {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+        nav {
+            width: 260px; /* Narrower menu */
+            background-color: #ffffff;
+            border-right: 1px solid #e0e0e0;
+            padding: 1.5rem;
+            overflow-y: auto;
+        }
+        nav h2 {
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            font-size: 1.1em;
+            color: #333;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            font-weight: 700;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .submenu-title {
+            display: block;
+            padding: 0.5rem 0;
+            margin-top: 1rem;
+            font-weight: 700;
+            color: #9e9e9e;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        nav > ul > li:first-child .submenu-title {
+            margin-top: 0;
+        }
+        ul.submenu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        ul.submenu li a {
+            text-decoration: none;
+            color: #424242;
+            display: block;
+            padding: 0.7rem 1rem; /* Smaller padding */
+            border-radius: 6px;
+            transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+            margin-bottom: 0.5rem;
+            font-size: 0.85em; /* Smaller font size */
+        }
+        ul.submenu li a:hover {
+            background-color: #e0f7fa; /* Lighter teal for hover */
+            color: #005f73; /* Match new header color */
+        }
+        ul.submenu li a.active {
+            background-color: #005f73; /* Match new header color */
+            color: #ffffff;
+        }
+        ul.submenu li a strong {
+            font-weight: 400;
+        }
+        ul.submenu li a.active strong {
+            font-weight: 700;
+        }
+        .content {
+            flex: 1;
+            padding: 0;
+            display: flex;
+        }
+        iframe {
+            flex: 1;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <header>
+            <img src="Captura de pantalla 2025-08-22 164111.png" alt="Logo 1" class="header-logo">
+            <h1>Gestión de Pesca Ríos de Neuquén - Dirección Provincial de Fauna</h1>
+            <img src="Captura de pantalla 2025-09-01 124324.png" alt="Logo 2" class="header-logo">
+        </header>
+        <div class="main-content">
+            <nav>
+                <h2>Menu</h2>
+                <ul>
+                    <li>
+                        <span class="submenu-title">Mapas</span>
+                        <ul class="submenu">
+                            <li><a href="https://www.google.com/maps/d/embed?mid=1JR92ECiRmTIx52ePo52cEv13C8NgJI0&ehbc=2E312F&noprof=1" class="active"><strong>Puntos Campamentos de Pesca</strong></a></li>
+                            <li><a href="https://www.google.com/maps/d/embed?mid=1Z3UNJGI1_p7U9-K0wQe5vlg9BRcxXuc&ehbc=2E312F&noprof=1"><strong>Lodge de Pesca NQN</strong></a></li>
+                            <li><a href="https://www.google.com/maps/d/embed?mid=12O17R12GDW3a83xTU8H2RXPf2BF0EM8&ehbc=2E312F&noprof=1"><strong>Denuncias 2025</strong></a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <span class="submenu-title">Documentos</span>
+                        <ul class="submenu">
+                            <li><a href="https://drive.google.com/file/d/1ysOAXEEhoM_IV3C-GU5vJ7dt5U0iEghc/view?usp=sharing" target="_blank"><strong>Informe de Agrimensura Interno 2025</strong></a></li>
+                            <li><a href="resumen_agrimensura.html"><strong>Resumen Informe de Agrimensura 2025</strong></a></li>
+                            <li><a href="https://drive.google.com/file/d/17bozmZ6oyufo8_3EWRQ5c-3VuAynUQTf/view?usp=drive_link" target="_blank"><strong>Solicitud Camaras de Guia 2025</strong></a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+            <div class="content">
+                <iframe name="content_frame" src="https://www.google.com/maps/d/embed?mid=1JR92ECiRmTIx52ePo52cEv13C8NgJI0&ehbc=2E312F&noprof=1"></iframe>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Simple script to handle active state
+        const links = document.querySelectorAll('nav ul.submenu li a');
+        const iframe = document.querySelector('iframe[name="content_frame"]');
+
+        links.forEach(link => {
+            link.addEventListener('click', function(e) {
+                // Don't do anything for links that open in a new tab
+                if (this.target === '_blank') {
+                    return;
+                }
+                
+                e.preventDefault(); // Prevent default link behavior
+
+                // Remove active class from all links that don't open in a new tab
+                links.forEach(l => {
+                    if (l.target !== '_blank') {
+                        l.classList.remove('active');
+                    }
+                });
+                
+                // Add active class to the clicked link
+                this.classList.add('active');
+
+                // Update iframe src if it's different
+                if (iframe.src !== this.href) {
+                    iframe.src = this.href;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
