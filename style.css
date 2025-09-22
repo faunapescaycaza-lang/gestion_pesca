@@ -252,7 +252,7 @@
         .image-gallery-item {
             border: 1px solid #e0e0e0;
             border-radius: 8px;
-            overflow: hidden;
+            /* Removed overflow: hidden; */
             text-align: center;
             background-color: #fff;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
@@ -269,6 +269,11 @@
             height: 120px;
             object-fit: cover;
             display: block;
+        }
+
+        .image-gallery-item {
+            display: flex;
+            flex-direction: column-reverse;
         }
 
         .image-gallery-item-title {
