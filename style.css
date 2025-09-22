@@ -166,9 +166,6 @@
             flex: 1;
             border: none;
         } */
-            display: none; /* Hidden by default on desktop */
-        }
-
         .overlay {
             display: none;
         }
