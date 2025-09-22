@@ -22,35 +22,60 @@
                 <h2>Menu</h2>
                 <ul>
                     <li>
-                        <span class="submenu-title">Mapas</span>
-                        <ul class="submenu">
-                            <li><a href="https://www.google.com/maps/d/embed?mid=1JR92ECiRmTIx52ePo52cEv13C8NgJI0&ehbc=2E312F&noprof=1" class="active"><strong>Puntos Campamentos de Pesca</strong></a></li>
-                            <li><a href="https://www.google.com/maps/d/embed?mid=1Z3UNJGI1_p7U9-K0wQe5vlg9BRcxXuc&ehbc=2E312F&noprof=1"><strong>Lodge de Pesca NQN</strong></a></li>
-                            <li><a href="https://www.google.com/maps/d/embed?mid=12O17R12GDW3a83xTU8H2RXPf2BF0EM8&ehbc=2E312F&noprof=1"><strong>Denuncias 2025</strong></a></li>
+                        <button class="submenu-title" aria-expanded="true" aria-controls="submenu-maps" data-submenu-id="submenu-maps">Mapas</button>
+                        <ul class="submenu" id="submenu-maps">
+                            <li><a href="#" class="active" data-content-type="map" data-content-url="https://www.google.com/maps/d/embed?mid=1JR92ECiRmTIx52ePo52cEv13C8NgJI0&ehbc=2E312F&noprof=1" data-target-id="dynamic-content"><strong>Puntos Campamentos de Pesca</strong></a></li>
+                            <li><a href="#" data-content-type="map" data-content-url="https://www.google.com/maps/d/embed?mid=1Z3UNJGI1_p7U9-K0wQe5vlg9BRcxXuc&ehbc=2E312F&noprof=1" data-target-id="dynamic-content"><strong>Lodge de Pesca NQN</strong></a></li>
+                            <li><a href="#" data-content-type="map" data-content-url="https://www.google.com/maps/d/embed?mid=12O17R12GDW3a83xTU8H2RXPf2BF0EM8&ehbc=2E312F&noprof=1" data-target-id="dynamic-content"><strong>Denuncias 2025</strong></a></li>
+                            <li><a href="#" data-content-type="image-gallery-all" data-target-id="dynamic-content"><strong>Relevamiento Sitios</strong></a></li>
                         </ul>
                     </li>
                     <li>
-                        <span class="submenu-title">Documentos</span>
-                        <ul class="submenu">
-                            <li><a href="https://drive.google.com/file/d/1ysOAXEEhoM_IV3C-GU5vJ7dt5U0iEghc/view?usp=sharing" target="_blank"><strong>Informe de Agrimensura Interno 2025</strong></a></li>
-                            <li><a href="resumen_agrimensura.html"><strong>Resumen Informe de Agrimensura 2025</strong></a></li>
-                            <li><a href="https://drive.google.com/file/d/17bozmZ6oyufo8_3EWRQ5c-3VuAynUQTf/view?usp=drive_link" target="_blank"><strong>Solicitud Camaras de Guia 2025</strong></a></li>
+                        <button class="submenu-title" aria-expanded="true" aria-controls="submenu-docs" data-submenu-id="submenu-docs">Documentos</button>
+                        <ul class="submenu" id="submenu-docs">
+                            <li><a href="https://drive.google.com/file/d/1ysOAXEEhoM_IV3C-GU5vJ7dt5U0iEghc/view?usp=sharing" target="_blank" data-content-type="external"><strong>Informe de Agrimensura Interno 2025</strong></a></li>
+                            <li><a href="#" data-content-type="internal-html" data-content-url="resumen_agrimensura.html" data-target-id="dynamic-content"><strong>Resumen Informe de Agrimensura 2025</strong></a></li>
+                            <li><a href="https://drive.google.com/file/d/17bozmZ6oyufo8_3EWRQ5c-3VuAynUQTf/view?usp=drive_link" target="_blank" data-content-type="external"><strong>Solicitud Camaras de Guia 2025</strong></a></li>
                         </ul>
                     </li>
                 </ul>
             </nav>
             <div class="overlay"></div>
-            <div class="content">
-                <iframe name="content_frame" src="https://www.google.com/maps/d/embed?mid=1JR92ECiRmTIx52ePo52cEv13C8NgJI0&ehbc=2E312F&noprof=1"></iframe>
-            </div>
+            <div class="content" id="dynamic-content"></div>
         </div>
     </div>
     <script>
         const body = document.querySelector('body');
         const menuToggle = document.querySelector('.menu-toggle');
         const overlay = document.querySelector('.overlay');
-        const links = document.querySelectorAll('nav ul.submenu li a');
-        const iframe = document.querySelector('iframe[name="content_frame"]');
+        const dynamicContent = document.getElementById('dynamic-content');
+        const navLinks = document.querySelectorAll('nav ul.submenu li a');
+        const submenuTitles = document.querySelectorAll('.submenu-title');
+
+        const imageGalleryData = [
+            { fullSrc: 'relevamiento/Casa de Kelly_Chimehuin.jpeg', thumbnailSrc: 'relevamiento/Casa de Kelly_Chimehuin.jpeg', title: 'Casa de Kelly_Chimehuin' },
+            { fullSrc: 'relevamiento/Confluencia Chimehuin_Collon Cura.jpeg', thumbnailSrc: 'relevamiento/Confluencia Chimehuin_Collon Cura.jpeg', title: 'Confluencia Chimehuin_Collon Cura' },
+            { fullSrc: 'relevamiento/Conito_Alumine.jpeg', thumbnailSrc: 'relevamiento/Conito_Alumine.jpeg', title: 'Conito_Alumine' },
+            { fullSrc: 'relevamiento/Isla Abajo Compuerta (Alamo Guacho)_Caleufu.jpeg', thumbnailSrc: 'relevamiento/Isla Abajo Compuerta (Alamo Guacho)_Caleufu.jpeg', title: 'Isla Abajo Compuerta (Alamo Guacho)_Caleufu' },
+            { fullSrc: 'relevamiento/Isla Alamo Guacho_Collon Cura.jpeg', thumbnailSrc: 'relevamiento/Isla Alamo Guacho_Collon Cura.jpeg', title: 'Isla Alamo Guacho_Collon Cura' },
+            { fullSrc: 'relevamiento/Isla del Aleman_Chimehuin.jpeg', thumbnailSrc: 'relevamiento/Isla del Aleman_Chimehuin.jpeg', title: 'Isla del Aleman_Chimehuin' },
+            { fullSrc: 'relevamiento/Isla Historica_Chimehuin.jpeg', thumbnailSrc: 'relevamiento/Isla Historica_Chimehuin.jpeg', title: 'Isla Historica_Chimehuin' },
+            { fullSrc: 'relevamiento/Isla la Papa_Collon Cura.jpeg', thumbnailSrc: 'relevamiento/Isla la Papa_Collon Cura.jpeg', title: 'Isla la Papa_Collon Cura' },
+            { fullSrc: 'relevamiento/La Laguna_Collon Cura.jpeg', thumbnailSrc: 'relevamiento/La Laguna_Collon Cura.jpeg', title: 'La Laguna_Collon Cura' },
+            { fullSrc: 'relevamiento/Piedras Negras_Alumine.jpeg', thumbnailSrc: 'relevamiento/Piedras Negras_Alumine.jpeg', title: 'Piedras Negras_Alumine' },
+            { fullSrc: 'relevamiento/Playa de Arenas_Alumine.jpeg', thumbnailSrc: 'relevamiento/Playa de Arenas_Alumine.jpeg', title: 'Playa de Arenas_Alumine' },
+            { fullSrc: 'relevamiento/Playa de Hormigas_Alumine.jpeg', thumbnailSrc: 'relevamiento/Playa de Hormigas_Alumine.jpeg', title: 'Playa de Hormigas_Alumine' },
+            { fullSrc: 'relevamiento/Pool de la marquesa_Chimehuin.jpeg', thumbnailSrc: 'relevamiento/Pool de la marquesa_Chimehuin.jpeg', title: 'Pool de la marquesa_Chimehuin' },
+            { fullSrc: 'relevamiento/Sauce Lloron y el Sapito_Caleufu.jpeg', thumbnailSrc: 'relevamiento/Sauce Lloron y el Sapito_Caleufu.jpeg', title: 'Sauce Lloron y el Sapito_Caleufu' }
+        ];
+
+        // Initial content load (first map link)
+        document.addEventListener('DOMContentLoaded', () => {
+            const initialLink = document.querySelector('nav ul.submenu li a.active');
+            if (initialLink) {
+                loadContent(initialLink);
+            }
+        });
 
         menuToggle.addEventListener('click', () => {
             body.classList.toggle('nav-open');
@@ -66,28 +91,134 @@
             menuToggle.textContent = 'Menú';
         });
 
-        links.forEach(link => {
-            link.addEventListener('click', function(e) {
-                if (this.target === '_blank') {
-                    return;
+        submenuTitles.forEach(button => {
+            button.addEventListener('click', () => {
+                const submenuId = button.dataset.submenuId;
+                const submenu = document.getElementById(submenuId);
+                if (submenu) {
+                    const isExpanded = button.getAttribute('aria-expanded') === 'true';
+                    button.setAttribute('aria-expanded', !isExpanded);
+                    submenu.classList.toggle('collapsed', isExpanded); // Add/remove 'collapsed' class
                 }
+            });
+        });
+
+        // Select all nav links, including the new top-level image gallery link
+        const allNavLinks = document.querySelectorAll('nav a');
+
+        allNavLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                const contentType = this.dataset.contentType;
+
+                if (contentType === 'external') {
+                    return; // Let the browser handle external links
+                }
+
                 e.preventDefault();
 
-                links.forEach(l => {
-                    if (l.target !== '_blank') {
+                // Remove active class from all internal links
+                allNavLinks.forEach(l => {
+                    if (l.dataset.contentType !== 'external') {
                         l.classList.remove('active');
                     }
                 });
                 this.classList.add('active');
 
-                if (iframe.src !== this.href) {
-                    iframe.src = this.href;
-                }
+                loadContent(this);
 
                 body.classList.remove('nav-open');
                 menuToggle.textContent = 'Menú';
             });
         });
+
+        function loadContent(linkElement) {
+            const contentType = linkElement.dataset.contentType;
+            const contentUrl = linkElement.dataset.contentUrl;
+            const targetId = linkElement.dataset.targetId;
+            const targetElement = document.getElementById(targetId);
+
+            if (!targetElement) {
+                console.error('Target element not found:', targetId);
+                return;
+            }
+
+            targetElement.innerHTML = ''; // Clear previous content
+
+            if (contentType === 'map') {
+                const iframe = document.createElement('iframe');
+                iframe.src = contentUrl;
+                iframe.style.flex = '1';
+                iframe.style.border = 'none';
+                targetElement.appendChild(iframe);
+            } else if (contentType === 'internal-html') {
+                fetch(contentUrl)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.text();
+                    })
+                    .then(html => {
+                        targetElement.innerHTML = html;
+                    })
+                    .catch(error => {
+                        console.error('Error loading internal HTML:', error);
+                        targetElement.innerHTML = '<p>Error al cargar el contenido.</p>';
+                    });
+            } else if (contentType === 'image-gallery-all') {
+                const imageGalleryContainer = document.createElement('div');
+                imageGalleryContainer.classList.add('image-gallery-container');
+
+                imageGalleryData.forEach(imageData => {
+                    const item = document.createElement('div');
+                    item.classList.add('image-gallery-item');
+                    item.innerHTML = `
+                        <img src="${imageData.thumbnailSrc}" alt="${imageData.title}">
+                        <div class="image-gallery-item-title">${imageData.title}</div>
+                    `;
+                    item.addEventListener('click', () => {
+                        openImageModal(imageData.fullSrc, imageData.title);
+                    });
+                    imageGalleryContainer.appendChild(item);
+                });
+                targetElement.appendChild(imageGalleryContainer);
+            }
+        }
+
+        function openImageModal(src, title) {
+            let modalOverlay = document.getElementById('image-modal-overlay');
+            if (!modalOverlay) {
+                modalOverlay = document.createElement('div');
+                modalOverlay.id = 'image-modal-overlay';
+                modalOverlay.classList.add('image-modal-overlay');
+                modalOverlay.innerHTML = `
+                    <div class="image-modal-content">
+                        <button class="image-modal-close">&times;</button>
+                        <img src="" alt="">
+                        <div class="image-modal-title"></div>
+                    </div>
+                `;
+                document.body.appendChild(modalOverlay);
+
+                modalOverlay.querySelector('.image-modal-close').addEventListener('click', closeImageModal);
+                modalOverlay.addEventListener('click', (e) => {
+                    if (e.target === modalOverlay) {
+                        closeImageModal();
+                    }
+                });
+            }
+
+            modalOverlay.querySelector('img').src = src;
+            modalOverlay.querySelector('.image-modal-title').textContent = title;
+            modalOverlay.classList.add('visible');
+        }
+
+        function closeImageModal() {
+            const modalOverlay = document.getElementById('image-modal-overlay');
+            if (modalOverlay) {
+                modalOverlay.classList.remove('visible');
+            }
+        }
     </script>
 </body>
 </html>
