@@ -1,9 +1,32 @@
-        body, html {
+        html, body {
             margin: 0;
             padding: 0;
             height: 100%;
+            min-height: 100vh; /* Ensure full viewport height */
             font-family: 'Roboto', sans-serif;
             background-color: #f0f2f5;
+            overflow: hidden; /* Prevent unwanted scrolling */
+        }
+        .dashboard {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            flex-grow: 1; /* Ensure it grows to fill available space */
+        }
+        header {
+            background-color: #005f73;
+            color: #ffffff;
+            padding: 0.3rem; /* Further reduced padding */
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-top: 0; /* Ensure no top margin */
+        }
+        header h1 {
+            flex-grow: 1; /* Allow h1 to take available space */
+            text-align: center; /* Center the text within h1 */
+            margin: 0 auto; /* Center h1 itself within the flex container */
+            font-size: 1.5em; /* Reduced font size for title */
         }
 
         .nav-open body {
@@ -148,6 +171,12 @@
             display: none;
         }
 
+        .header-logo {
+            height: 30px; /* Further reduced logo height */
+            object-fit: contain;
+            margin: 0 10px; /* Add some space around logos */
+        }
+
         /* Mobile Styles */
         @media (max-width: 768px) {
             .header-logo {
@@ -201,6 +230,12 @@
             }
             .nav-open .overlay {
                 display: block;
+            }
+            .main-content {
+                flex-direction: column; /* Stack nav and content vertically */
+            }
+            .content {
+                min-height: calc(100vh - 60px); /* Ensure content takes full viewport height minus header */
             }
         }
 
