@@ -5,36 +5,14 @@
             font-family: 'Roboto', sans-serif;
             background-color: #f0f2f5;
         }
-        .dashboard {
-            display: flex;
-            flex-direction: column;
-            height: 100%;
+
+        .nav-open body {
+            overflow: hidden; /* Prevent scrolling of background content when nav is open */
         }
-        header {
-            background-color: #005f73;
-            color: white;
-            padding: 0.2rem 1rem;
-            text-align: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            z-index: 101; /* Ensure header is above content */
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            position: sticky;
-            top: 0;
-        }
-        header h1 {
-            margin: 0;
-            font-size: 1.4em;
-            font-weight: 400;
-            flex-grow: 1;
-        }
-        .header-logo {
-            height: 45px;
-            width: auto;
-            margin: 0 1rem;
-        }
+
         .main-content {
+            position: relative; /* Ensure z-index works correctly */
+            z-index: 1; /* Ensure it's above other elements if needed */
             display: flex;
             flex: 1;
             overflow: hidden;
